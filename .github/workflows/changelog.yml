@@ -1,0 +1,49 @@
+name: Auto Update Changelog
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  update-changelog:
+    # Only works if pull request has merged (not close)
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Update CHANGELOG.md
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          DATE=$(date +'%Y-%m-%d')
+          
+          CHANGELOG="Assets/FCT/CHANGELOG.md"
+          
+          # new markdown entry
+          NEW_ENTRY="\n## [Unreleased] - $DATE\n### Merged\n- $PR_TITLE ([Ver PR]($PR_URL))\n"
+          
+          # temporal python script to insert text
+          python -c "
+          import sys
+          with open('$CHANGELOG', 'r') as f: lines = f.readlines()
+          # inset on line 3 (after title and description)
+          lines.insert(2, '$NEW_ENTRY\n')
+          with open('$CHANGELOG', 'w') as f: f.writelines(lines)
+          "
+
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: Auto-update CHANGELOG.md with PR #${{ github.event.pull_request.number }}"
+          file_pattern: Assets/FCT/CHANGELOG.md
+          branch: main
+
