@@ -1,6 +1,6 @@
 # Fast Core Tool (FCT)
 
-![FCT Preview](fast-core-tool-image.png)
+![FCT Preview](Resources/ftc_1.0.0.gif)
 
 FCT is a professional, modular framework for Unity that jumpstarts your game development by handling boilerplate systems like Inputs, State Machines, Localization, and Object Pooling.
 
