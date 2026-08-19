@@ -34,4 +34,4 @@ If you prefer to setup systems manually or add them later, go to the **Setup Hub
 - Unity 2022.3 or newer.
 - TextMeshPro (included in Unity by default).
 - Unity New Input System package.
-- Cinemachine (optional, for camera setups).
+- Cinemachine (for camera setups).
