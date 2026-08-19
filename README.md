@@ -1,45 +1,32 @@
-# FastCoreTool (FCT)
+# Fast Core Tool (FCT)
 
-**FastCoreTool (FCT)** is a lightweight core framework for Unity designed to help you start and structure your projects faster.
-FCT provides a collection of simple, ready-to-use systems for common game development needs without forcing your project into a complex architecture.
-
-## Features
-
-- **State Machine (FSM)** — Lightweight state-based architecture for managing game logic.
-- **Live FSM Debugger** — Monitor the current state directly from the Unity Editor while the game is running.
-- **State Generator** — Automatically generate new `IState` implementations from the editor.
-- **Object Pooling** — Reusable pooling system for frequently instantiated objects.
-- **Input Management** — Centralized input configuration and management.
-- **Core Game Manager** — A simple foundation for managing your game's core flow.
-- **Core Wizard** — Set up the main FCT systems directly from the Unity Editor.
-- **Organized Namespaces** — Clean `Vobb.FCT.*` namespace structure.
-- **Assembly Definitions** — Includes `Vobb.FCT.asmdef` for better project organization and compilation.
-- **Easy Integration** — Designed for both new and existing Unity projects.
+FCT is a professional, modular framework for Unity that jumpstarts your game development by handling boilerplate systems like Inputs, State Machines, Localization, and Object Pooling.
 
 ## Getting Started
-After importing FCT into your Unity project:
 
-1. Open Unity.
-2. Go to **FCT → Core Wizard**.
-3. Use the setup wizard to configure the systems you need.
-4. Configure your input settings through the generated `FCT_InputConfig` asset.
-5. Start building your game.
+### 1. Open the Hub
+Navigate to the top Unity menu and click **`FCT -> Core Wizard`**. This is your central command center.
 
-## Core Wizard
-The **Core Wizard** provides a central place for configuring FCT inside the Unity Editor.
-It can help you set up your project, create the required configuration assets, initialize core systems, and generate example components.
+### 2. Initialize Your Scene
+In the **Setup Hub** tab of the wizard, you will find 5 setup buttons. Click them to automatically inject the necessary managers into your active scene:
+- **Setup SimplePool**: Instantiates the object pooling manager.
+- **Generate GameManager**: Creates a boilerplate State Machine script ready for your game logic.
+- **Setup Localization**: Creates the `LocalizationManager` and its required database file.
 
-### State Generator
-Create new FSM states directly from the Core Wizard.
-Enter your state name and Game Manager type and FCT will automatically generate a C# class implementing the required `IState` structure.
+### 3. Configure Inputs
+1. Double-click your `.inputactions` file and define your actions (e.g., "Jump", "Fire").
+2. Create an `InputConfig` (Right click in Project -> Create -> FCT -> Input Config).
+3. Assign your `.inputactions` file to it and click **"Sync Actions"**.
+4. In your code, read inputs easily: `GameInput.Instance.GetButtonDown("Jump")`.
 
-### Live FSM Debugger
-When entering Play Mode, the Core Wizard can automatically detect an active `CoreGameManager` and display its current FSM state in real time.
-This provides a quick way to inspect state transitions without adding additional debugging code.
+### 4. Configure Localization (Google Sheets)
+1. In the FCT Wizard, go to the **Config** tab.
+2. Paste your Google Sheets CSV Export URL.
+3. Click **"Sync Now"**. All your spreadsheet translations will be downloaded and saved into the project.
+4. Add the `LocalizeText` component to any TextMeshPro UI element and pick your translation key from the dropdown!
 
-## Philosophy
-FCT is designed around three principles:
-
-**Simple. Lightweight. Practical.**
-It provides the common foundations many Unity projects need while staying out of the way of your game's architecture.
-Use the systems you need, ignore the ones you don't.
+## Requirements
+- Unity 2022.3 or newer.
+- TextMeshPro (included in Unity by default).
+- Unity New Input System package.
+- Cinemachine (optional, for camera setups).
