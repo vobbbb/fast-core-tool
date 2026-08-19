@@ -95,7 +95,7 @@ namespace FCT.Tools.Editor
             for (int i = 0; i < tabs.Length; i++)
             {
                 bool isSelected = (selectedTab == i);
-                GUI.backgroundColor = isSelected ? new Color(0.3f, 0.6f, 0.9f) : Color.white;
+                GUI.backgroundColor = isSelected ? new Color(0.224f, 0.549f, 0.427f) : Color.white;
                 
                 if (GUILayout.Button(tabs[i], EditorStyles.miniButtonMid, GUILayout.Width(85), GUILayout.Height(24)))
                 {
@@ -122,7 +122,7 @@ namespace FCT.Tools.Editor
             
             GUILayout.Space(20);
             
-            GUI.backgroundColor = new Color(0.2f, 0.6f, 1f);
+            GUI.backgroundColor = new Color(0.224f, 0.549f, 0.427f);
             if (GUILayout.Button("Start Quick Tutorial", GUILayout.Height(40)))
             {
                 tutorialStep = 1;
@@ -157,17 +157,9 @@ namespace FCT.Tools.Editor
                 EditorGUILayout.HelpBox(helpText, tutorialStep == 6 ? MessageType.Info : MessageType.Warning);
                 
                 GUILayout.BeginHorizontal();
-                if (tutorialStep == 6)
+                GUILayout.FlexibleSpace();
+                if (tutorialStep < 6)
                 {
-                    if (GUILayout.Button("Finish Tutorial", GUILayout.Height(30)))
-                    {
-                        tutorialStep = 0;
-                        selectedTab = 0; // Volver al Home
-                    }
-                }
-                else
-                {
-                    GUILayout.FlexibleSpace();
                     if (GUILayout.Button("Quit Tutorial", EditorStyles.miniButtonRight, GUILayout.Width(100))) 
                     {
                         tutorialStep = 0;
@@ -184,21 +176,33 @@ namespace FCT.Tools.Editor
 
             // Bloquear todos los botones que no sean el paso actual del tutorial (si está activo)
             GUI.enabled = tutorialStep == 0 || tutorialStep == 1;
-            DrawSetupCard("1. Input System", "Creates a ScriptableObject to map new Input System actions.", "Create Input Config", () => { CreateInputConfig(); AdvanceTutorial(1); });
+            DrawSetupCard(1, "1. Input System", "Creates a ScriptableObject to map new Input System actions.", "Create Input Config", () => { CreateInputConfig(); AdvanceTutorial(1); });
             
             GUI.enabled = tutorialStep == 0 || tutorialStep == 2;
-            DrawSetupCard("2. Object Pooling", "Instantiates the SimplePool manager in the active scene.", "Setup SimplePool", () => { CreateSimplePool(); AdvanceTutorial(2); });
+            DrawSetupCard(2, "2. Object Pooling", "Instantiates the SimplePool manager in the active scene.", "Setup SimplePool", () => { CreateSimplePool(); AdvanceTutorial(2); });
             
             GUI.enabled = tutorialStep == 0 || tutorialStep == 3;
-            DrawSetupCard("3. FSM Architecture", "Generates a boilerplate GameManager script in your project.", "Generate GameManager", () => { GenerateGameManager(); AdvanceTutorial(3); });
+            DrawSetupCard(3, "3. FSM Architecture", "Generates a boilerplate GameManager script in your project.", "Generate GameManager", () => { GenerateGameManager(); AdvanceTutorial(3); });
             
             GUI.enabled = tutorialStep == 0 || tutorialStep == 4;
-            DrawSetupCard("4. Camera System", "Adds a Cinemachine Brain and Virtual Camera to the scene.", "Setup Cinemachine", () => { SetupCamera(); AdvanceTutorial(4); });
+            DrawSetupCard(4, "4. Camera System", "Adds a Cinemachine Brain and Virtual Camera to the scene.", "Setup Cinemachine", () => { SetupCamera(); AdvanceTutorial(4); });
             
             GUI.enabled = tutorialStep == 0 || tutorialStep == 5;
-            DrawSetupCard("5. Localization System", "Instantiates the Localization Manager and generates base Data.", "Setup Localization", () => { SetupLocalization(); AdvanceTutorial(5); });
+            DrawSetupCard(5, "5. Localization System", "Instantiates the Localization Manager and generates base Data.", "Setup Localization", () => { SetupLocalization(); AdvanceTutorial(5); });
 
             GUI.enabled = true;
+
+            if (tutorialStep == 6)
+            {
+                GUILayout.Space(20);
+                GUI.backgroundColor = new Color(0.224f, 0.549f, 0.427f); // #398C6D
+                if (GUILayout.Button("Finish Tutorial", GUILayout.Height(40)))
+                {
+                    tutorialStep = 0;
+                    selectedTab = 0; // Volver al Home
+                }
+                GUI.backgroundColor = Color.white;
+            }
         }
 
         private void AdvanceTutorial(int fromStep)
@@ -209,11 +213,25 @@ namespace FCT.Tools.Editor
             }
         }
 
-        private void DrawSetupCard(string title, string description, string buttonText, System.Action onButtonClick)
+        private void DrawSetupCard(int stepIndex, string title, string description, string buttonText, System.Action onButtonClick)
         {
-            EditorGUILayout.BeginVertical("helpbox");
+            bool isCurrentStep = tutorialStep > 0 && tutorialStep == stepIndex;
+            bool isCompleted = tutorialStep > stepIndex;
+
+            if (isCurrentStep) GUI.color = new Color(0.133f, 0.133f, 0.133f); // #222222
+            EditorGUILayout.BeginVertical("window");
+            if (isCurrentStep) GUI.color = Color.white;
+
             GUILayout.Space(5);
+            
+            GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(title, EditorStyles.boldLabel);
+            if (isCompleted)
+            {
+                GUIStyle completedStyle = new GUIStyle(EditorStyles.boldLabel) { normal = { textColor = new Color(0.2f, 0.8f, 0.2f) } };
+                GUILayout.Label("✔ Completed", completedStyle, GUILayout.Width(90));
+            }
+            GUILayout.EndHorizontal();
             
             GUIStyle descStyle = new GUIStyle(EditorStyles.wordWrappedLabel) { fontSize = 11, normal = { textColor = new Color(0.7f, 0.7f, 0.7f) } };
             EditorGUILayout.LabelField(description, descStyle);
@@ -221,10 +239,15 @@ namespace FCT.Tools.Editor
             
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
+            
+            // Botones por defecto color #398C6D
+            GUI.backgroundColor = new Color(0.224f, 0.549f, 0.427f);
             if (GUILayout.Button(buttonText, GUILayout.Width(160), GUILayout.Height(26)))
             {
                 onButtonClick?.Invoke();
             }
+            GUI.backgroundColor = Color.white;
+            
             GUILayout.EndHorizontal();
             GUILayout.Space(5);
             EditorGUILayout.EndVertical();
@@ -251,7 +274,7 @@ namespace FCT.Tools.Editor
 
             GUILayout.Space(15);
             
-            GUI.backgroundColor = new Color(0.2f, 0.7f, 0.3f);
+            GUI.backgroundColor = new Color(0.224f, 0.549f, 0.427f);
             if (GUILayout.Button("Generate State Script", GUILayout.Height(35)))
             {
                 GenerateStateScript(newStateName, targetManagerName);
@@ -326,11 +349,14 @@ namespace FCT.Tools.Editor
                 GUILayout.BeginHorizontal();
                 string currentDataPath = EditorPrefs.GetString("FCT_LocAssetPath", "Assets/Resources/Database/LocalizationData.asset");
                 string newDataPath = EditorGUILayout.TextField(currentDataPath);
+                
+                GUI.backgroundColor = new Color(0.224f, 0.549f, 0.427f);
                 if (GUILayout.Button("Browse", GUILayout.Width(70)))
                 {
                     string selected = EditorUtility.SaveFilePanelInProject("Select LocalizationData", "LocalizationData", "asset", "Select where to save or find LocalizationData.");
                     if (!string.IsNullOrEmpty(selected)) newDataPath = selected;
                 }
+                GUI.backgroundColor = Color.white;
                 GUILayout.EndHorizontal();
 
                 if (newDataPath != currentDataPath)
@@ -369,11 +395,28 @@ namespace FCT.Tools.Editor
                 
                 GUILayout.Space(10);
                 GUILayout.BeginHorizontal();
+                
+                GUI.backgroundColor = new Color(0.224f, 0.549f, 0.427f);
+                if (GUILayout.Button("View Example CSV", GUILayout.Width(130), GUILayout.Height(24)))
+                {
+                    var exampleAsset = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/FCT/Resources/Localization_Example.csv");
+                    if (exampleAsset != null)
+                    {
+                        EditorGUIUtility.PingObject(exampleAsset);
+                        Selection.activeObject = exampleAsset;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("[FCT] Localization_Example.csv not found at Assets/FCT/Resources/Localization_Example.csv");
+                    }
+                }
+                
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button("Sync Now", GUILayout.Width(100), GUILayout.Height(24)))
                 {
                     FCT.Localization.Editor.LocalizationImporter.Import();
                 }
+                GUI.backgroundColor = Color.white;
                 GUILayout.EndHorizontal();
                 GUILayout.Space(5);
             }
