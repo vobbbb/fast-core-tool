@@ -7,8 +7,11 @@ FCT is a professional, modular framework for Unity that jumpstarts your game dev
 ### 1. Open the Hub
 Navigate to the top Unity menu and click **`FCT -> Core Wizard`**. This is your central command center.
 
-### 2. Initialize Your Scene
-In the **Setup Hub** tab of the wizard, you will find 5 setup buttons. Click them to automatically inject the necessary managers into your active scene:
+### 2. Quick Tutorial (Recommended)
+When you open the Wizard, you will land on the **Home** tab. Click the big blue **"Start Quick Tutorial"** button. This will activate a guided mode that takes you step-by-step through setting up all the core systems (Input, Pool, State Machine, Camera, and Localization) in your current scene.
+
+### 3. Manual Initialization (Setup Hub)
+If you prefer to setup systems manually or add them later, go to the **Setup Hub** tab. Here you will find the 5 setup buttons to inject individual managers into your active scene:
 - **Setup SimplePool**: Instantiates the object pooling manager.
 - **Generate GameManager**: Creates a boilerplate State Machine script ready for your game logic.
 - **Setup Localization**: Creates the `LocalizationManager` and its required database file.
