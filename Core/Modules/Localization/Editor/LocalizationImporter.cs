@@ -10,7 +10,7 @@ namespace FCT.Localization.Editor
 {
     public static class LocalizationImporter
     {
-        [MenuItem("FCT/Localization/Sync From Google Sheets")]
+        [MenuItem("Window/FCT/Localization/Sync From Google Sheets")]
         public static void Import()
         {
             string SheetUrl = EditorPrefs.GetString("FCT_LocalizationSheetUrl", "");

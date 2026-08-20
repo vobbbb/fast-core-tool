@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCT Cover Image Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Contenedor exacto de 1950x1300 para la Asset Store */
+        .cover-container {
+            width: 1950px;
+            height: 1300px;
+            background-color: #383838;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #d2d2d2;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: scale(0.5); /* Escalar para que quepa en la pantalla al previsualizar */
+            transform-origin: center;
+        }
+
+        /* HEADER */
+        .header {
+            background-color: #2d2d2d;
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid #222;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 58px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            color: #999;
+            font-size: 28px;
+            margin: 10px 0 0 0;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 0;
+            border-bottom: 2px solid #222;
+        }
+
+        .tab {
+            padding: 15px 40px;
+            font-size: 26px;
+            color: #e0e0e0;
+            border-right: 1px solid #333;
+            border-left: 1px solid #555;
+            cursor: pointer;
+            background-color: #555;
+        }
+
+        .tab.active {
+            background-color: #1c3829;
+            color: #fff;
+            border-left: 1px solid #1c3829;
+            border-right: 1px solid #1c3829;
+        }
+
+        /* CONTENT */
+        .content {
+            padding: 60px 100px;
+            flex: 1;
+        }
+
+        .content h2 {
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background-color: #444;
+            border: 2px solid #222;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            border-radius: 4px;
+            margin-bottom: 60px;
+        }
+
+        .icon-warning {
+            background-color: #fff;
+            color: #383838;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            font-weight: bold;
+            margin-right: 30px;
+            flex-shrink: 0;
+        }
+
+        .info-box p {
+            font-size: 28px;
+            margin: 0;
+            color: #ccc;
+            line-height: 1.4;
+        }
+
+        .btn-large {
+            background-color: #1c3829;
+            color: #fff;
+            width: 100%;
+            padding: 40px;
+            font-size: 36px;
+            text-align: center;
+            border: 2px solid #112211;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 60px;
+            font-weight: 600;
+        }
+
+        .footer-box {
+            background-color: #444;
+            border: 2px solid #222;
+            padding: 20px 30px;
+            border-radius: 4px;
+        }
+
+        .footer-box p {
+            font-size: 26px;
+            margin: 0;
+            color: #ccc;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cover-container" id="capture">
+        
+        <div class="header">
+            <h1>FAST CORE TOOL</h1>
+            <p>Professional Framework Initializer</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active">Home</div>
+            <div class="tab">Setup Hub</div>
+            <div class="tab">Generators</div>
+            <div class="tab">Live Debugger</div>
+            <div class="tab">Config</div>
+        </div>
+
+        <div class="content">
+            <h2>Welcome to FCT</h2>
+            
+            <div class="info-box">
+                <div class="icon-warning">!</div>
+                <p>Fast Core Tool (FCT) is a professional, modular framework for Unity that jumpstarts your game development by handling boilerplate systems like Inputs, State Machines, Localization, and Object Pooling.</p>
+            </div>
+
+            <div class="btn-large">
+                Start Quick Tutorial
+            </div>
+
+            <div class="footer-box">
+                <p>The Quick Tutorial will guide you step-by-step through configuring all essential systems for a new project. Highly recommended for first-time users.</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -6,7 +6,7 @@ namespace Heron.Core.Editor
 {
     public class PlatformSwitcher : EditorWindow
     {
-        [MenuItem("FCT/Platform Switcher/Open Switcher Dashboard", false, 0)]
+        [MenuItem("Window/FCT/Platform Switcher/Open Switcher Dashboard", false, 0)]
         public static void OpenWindow()
         {
             var window = GetWindow<PlatformSwitcher>("Platform Switcher");
@@ -98,13 +98,13 @@ namespace Heron.Core.Editor
             EditorGUILayout.EndVertical();
         }
 
-        [MenuItem("FCT/Platform Switcher/Quick Switch to PC (Windows)", false, 20)]
+        [MenuItem("Window/FCT/Platform Switcher/Quick Switch to PC (Windows)", false, 20)]
         public static void SwitchToPC()
         {
             SwitchPlatform(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows64, "Windows Standalone PC");
         }
 
-        [MenuItem("FCT/Platform Switcher/Quick Switch to Android", false, 21)]
+        [MenuItem("Window/FCT/Platform Switcher/Quick Switch to Android", false, 21)]
         public static void SwitchToAndroid()
         {
             SwitchPlatform(BuildTargetGroup.Android, BuildTarget.Android, "Android");

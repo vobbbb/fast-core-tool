@@ -17,7 +17,7 @@ namespace FCT.Tools.Editor
         // Pestañas actualizadas con "Home" al principio
         private readonly string[] tabs = { "Home", "Setup Hub", "Generators", "Live Debugger", "Config" };
 
-        [MenuItem("FCT/Core Wizard", false, 10)]
+        [MenuItem("Window/FCT/Core Wizard", false, 10)]
         public static void ShowWindow()
         {
             var window = GetWindow<FCTCoreWizard>("FCT Core");
